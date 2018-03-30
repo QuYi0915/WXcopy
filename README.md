@@ -29,3 +29,15 @@
 
     COPY.copy([{string}]);
 
+# 示例 #
+`
+var copybtn = document.querySelector('#copybtn');
+var COPY = $C.init({
+	el: '#copyid',
+	hideEl: true
+});
+copybtn.addEventListener('touchend', function () {
+	COPY.copy();
+	COPY.copy('自定义内容');
+});
+`
