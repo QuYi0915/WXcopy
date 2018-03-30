@@ -18,20 +18,16 @@
 	};
 	$C.prototype.hideEl=function(el){
 		el.style.opacity='0';
-		el.style.position='absolute';
+		el.style.display='absolute';
 		el.style.zIndex='-999';
 	};
 	$C.prototype.copy=function(text){
 		if(text){
-			var textEl=document.querySelector('#copy_box');
-			if(!textEl){
-				textEl=document.createElement('div');
-				textEl.id='copy_box';
-				var textNode=document.createTextNode(text);
-				textEl.appendChild(textNode);
-				this.hideEl(textEl);
-				document.documentElement.appendChild(textEl);
-			}
+			var textEl=document.createElement('div');
+			var textNode=document.createTextNode(text);
+			textEl.appendChild(textNode);
+			this.hideEl(textEl);
+			document.documentElement.appendChild(textEl);
 			this.elDOM=textEl;
 		}
 		if(typeof _this.getSelection === 'function'){
