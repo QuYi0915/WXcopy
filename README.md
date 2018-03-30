@@ -10,17 +10,18 @@
 
 **初始化配置**
 
-1.el {String} 为 document.querySelector 选择器参数；
+1.el：{String} 为 document.querySelector 选择器参数；
 
-2.hideEl {Boolean} 为复制源元素是否显示在页面上，用于元素复制时使用；
+2.hideEl：{Boolean} 为复制源元素是否显示在页面上，用于元素复制时使用；
 
 3.调用init方法后返回当前el元素及选择器；当调用copy方法后将返回done，类型为Boolean，用于判断是否copy成功；
-`
+
+
     var COPY =$C.init({
     	el:'#copyid',
     	hideEl:true
     });
-`
+
 
 **调用**
 
