@@ -14,6 +14,7 @@
 
 2.hideEl {Boolean} 为复制源元素是否显示在页面上，用于元素复制时使用；
 
+3.调用init方法后返回当前el元素及选择器；当调用copy方法后将返回done，类型为Boolean，用于判断是否copy成功；
 `
     var COPY =$C.init({
     	el:'#copyid',
@@ -28,6 +29,8 @@
 2.也可直接填入内容,内容为string类型，若设置该参数时将替换init方法中的元素子内容
 
     COPY.copy([{string}]);
+    
+**注意：必须需要交互事件中调用copy方法**
 
 # 示例 #
 
