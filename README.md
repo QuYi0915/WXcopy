@@ -14,7 +14,7 @@
 
 2.hideEl：{Boolean} 为复制源元素是否显示在页面上，用于元素复制时使用；
 
-3.调用init方法后返回当前el元素及选择器；当调用copy方法后将返回done，类型为Boolean，用于判断是否copy成功；
+3.调用init方法后返回当前el元素及选择器；当调用copy方法后将返回done属性，类型为Boolean，用于判断是否copy成功；
 
 
     var COPY =$C.init({
@@ -31,7 +31,7 @@
 
     COPY.copy([{string}]);
     
-**注意：必须需要交互事件中调用copy方法**
+**注意：必须在交互事件中调用copy方法 如click、touchend**
 
 # 示例 #
 
@@ -41,7 +41,7 @@
 		hideEl: true`
 	});
 	copybtn.addEventListener('touchend', function () {
-		COPY.copy();
+		//COPY.copy();//复制元素子内容
 		COPY.copy('自定义内容');
 	});
 
