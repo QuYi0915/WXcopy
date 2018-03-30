@@ -33,8 +33,8 @@
 
 	var copybtn = document.querySelector('#copybtn');
 	var COPY = $C.init({
-		`el: '#copyid',
-		`hideEl: true`
+		el: '#copyid',
+		hideEl: true`
 	});
 	copybtn.addEventListener('touchend', function () {
 		COPY.copy();
