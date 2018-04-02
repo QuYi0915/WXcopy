@@ -45,3 +45,7 @@
 		COPY.copy('自定义内容');
 	});
 
+# 说明 #
+
+**兼容性**
+方法使用了document.execCommand方法进行复制，默认兼容该方法兼容浏览器，已测试移动端包括：safari、UC、微信（ios），PC端包括：chrome、firefox、UC浏览器
