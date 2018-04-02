@@ -1,4 +1,4 @@
-//1页面元素复制（是否包含html代码）、2指定文本内容复制；
+//1页面元素复制、2指定文本内容复制；
 (function(window){
 	var _this = window||global;
 	var $C=function(){};
