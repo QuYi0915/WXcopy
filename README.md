@@ -13,22 +13,22 @@
 
 1.el：{String} 为 document.querySelector 选择器参数；
 
-2.hideEl：{Boolean} 为复制源元素是否显示在页面上，用于元素复制时使用；
+2.trim：{Boolean} 为复制源元素是否删除空格回车等空白，默认删除；
 
 3.调用init方法后返回当前el元素及选择器；当调用copy方法后将返回done属性，类型为Boolean，用于判断是否copy成功；
 
 
     var COPY =$C.init({
     	el:'#copyid',
-    	hideEl:true
+    	trim:false
     });
 
 
 **调用**
 
-1.可直接调用，该方式复制内容为init方法中的元素子内容
+1.可直接调用，该方式复制内容为init方法中的元素子文本内容
 
-2.也可直接填入内容,内容为string类型，若设置该参数时将替换init方法中的元素子内容
+2.也可直接填入内容,内容为string类型，使用此方法并不会对init方法中传入元素内容复制进行覆盖，依旧可以调用COPY.copy()复制原本定义元素的内容
 
     COPY.copy([{string}]);
     
@@ -38,8 +38,7 @@
 
 	var copybtn = document.querySelector('#copybtn');
 	var COPY = $C.init({
-		el: '#copyid',
-		hideEl: true`
+		el: '#copyid'
 	});
 	copybtn.addEventListener('touchend', function () {
 		//COPY.copy();//复制元素子内容
