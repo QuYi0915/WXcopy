@@ -54,8 +54,9 @@
 		}
 		if(!addcontent(text)){
 			this.done=false;
+		}else{
+			this.done = iframeWindow.document.execCommand('copy', false, '');
 		}
-		this.done = iframeWindow.document.execCommand('copy', false, '');
 		return this;
 	};
 
