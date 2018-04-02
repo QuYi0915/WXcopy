@@ -1,8 +1,35 @@
-
-//1页面元素复制、2指定文本内容复制；
+//1页面元素复制（是否包含html代码）、2指定文本内容复制；
 (function(window){
 	var _this = window||global;
 	var $C=function(){};
+	var eltext='';//复制内容
+	var trim=true;//复制元素时是否去掉空格
+	//插入iframe，操作iframe进行复制；
+	var iframeElement = document.createElement('iframe');
+	iframeElement.style.cssText = 'width:0;height:0;position:absolute;top:0;border:0;';
+	iframeElement.src = 'about:blank';
+	document.documentElement.appendChild(iframeElement);
+	// var iframeElement = document.getElementsByTagName('iframe')[0];
+	var iframeWindow = iframeElement.contentWindow;
+
+	//文本插入到iframe中；
+	function addcontent(text){
+		iframeWindow.document.open();
+		iframeWindow.document.write(text);
+		iframeWindow.document.close();
+		return iframeWindow.document.execCommand('selectAll', false, '');
+	}
+	//取出元素text节点内容；
+	function getText(node){
+		for(var i=0;i<node.childNodes.length;i++){
+			if(node.childNodes[i].nodeType===1){
+				getText(node.childNodes[i])
+			}else if(node.childNodes[i].nodeType===3){
+				eltext+=node.childNodes[i].nodeValue.replace(/\s/g,'');
+			}
+		}
+	}
+
 	$C.prototype.init=function (option){
 		if(option&&option.el){
 			this.el=option.el||'div';
@@ -11,40 +38,27 @@
 				throw '复制元素未找到，选择器为querySelector方法参数';
 			}
 		}
-		if(option&&option.hideEl){
-			this.hideEl(this.elDOM);
-		}
+		(option&&typeof option.trim==='boolean')&&(trim=false);
 		return this;
 	};
-	$C.prototype.hideEl=function(el){
-		el.style.opacity='0';
-		el.style.position='absolute';
-		el.style.zIndex='-999';
-	};
+
 	$C.prototype.copy=function(text){
-		if(text){
-			var textEl=document.querySelector('#copy_box');
-			if(!textEl){
-				textEl=document.createElement('div');
-				textEl.id='copy_box';
-				var textNode=document.createTextNode(text);
-				textEl.appendChild(textNode);
-				this.hideEl(textEl);
-				document.documentElement.appendChild(textEl);
-			}
-			this.elDOM=textEl;
-		}
-		if(typeof _this.getSelection === 'function'){
-			_this.getSelection().selectAllChildren(this.elDOM);
-			if(_this.getSelection().baseNode.data){
-				this.done=document.execCommand('copy',true);
+		if(!text){
+			eltext='';
+			if(trim){
+				getText(this.elDOM);
+				text=eltext;
 			}else{
-				this.done=false;
+				text=this.elDOM.outerHTML;
 			}
-		}else{
+		}
+		if(!addcontent(text)){
 			this.done=false;
 		}
+		this.done = iframeWindow.document.execCommand('copy', false, '');
 		return this;
 	};
+
+	// _this.document.designMode = 'On';
 	_this.$C=new $C();
 }(window));
